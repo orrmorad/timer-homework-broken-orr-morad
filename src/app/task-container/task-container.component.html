@@ -1,9 +1,0 @@
-<div class="task-list-container">
-  <ng-container *ngIf="tasks$ | async as tasks">
-    <div class="task">
-      <app-task-presenter *ngFor="let task of tasks" [task]="task"
-        (clicked)="onClick($event)"></app-task-presenter>
-    </div>
-  </ng-container>
-  <h2>Total: {{ totalTime$ | async | minuteSeconds }}</h2>
-</div>
