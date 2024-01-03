@@ -5,6 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { of } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
+import { By } from '@angular/platform-browser';
+import { TaskModel } from '../models/task-model';
 
 describe('TaskPresenterComponent', () => {
   let component: TaskPresenterComponent;
@@ -45,4 +47,22 @@ describe('TaskPresenterComponent', () => {
     // Assert
     expect(fixture.nativeElement).toMatchSnapshot();
   });
+
+  it('should emit output', () => {
+    const button = fixture.debugElement.query(By.css('button'));
+    const task = component.task;
+    let emitValue: any;
+    component.clicked.subscribe(newValue => emitValue = newValue);
+    button.triggerEventHandler('click', null);
+    expect(emitValue).toBe(task);
+  });
+
+  it('input value should be displayed', () => {
+    let taskMock: TaskModel = { id: 1, buttonText: 'pause', timer: of(), name: 'task1' };
+    taskMock.name = 'task1';
+    component.task = taskMock;
+    fixture.detectChanges();
+    const element = fixture.debugElement.query(By.css('.input-name'));
+    expect(element.nativeElement.textContent).toContain('task1');
+  })
 });

@@ -4,10 +4,7 @@ import {
   Input,
   Output,
   EventEmitter,
-  ChangeDetectionStrategy,
-  OnChanges,
-  SimpleChanges,
-  ChangeDetectorRef,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { TaskModel } from '../models/task-model';
 
@@ -15,7 +12,7 @@ import { TaskModel } from '../models/task-model';
   selector: 'app-task-presenter',
   templateUrl: './task-presenter.component.html',
   styleUrls: ['./task-presenter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TaskPresenterComponent implements OnInit {
   @Input() task: TaskModel;

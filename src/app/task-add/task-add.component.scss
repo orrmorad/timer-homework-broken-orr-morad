@@ -1,10 +1,18 @@
-.add-card {
-  min-width: 120px;
-  margin: 20px auto;
+button{
+  height: 20px;
+  margin-left: 15px;
 }
-.row {
+
+.error{
+  color: red;
+  font-size: 12px;
+  height: 20px;
+}
+
+.form-content {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: baseline;
+}
+
+.form-container {
+  margin-bottom: 15px;
 }

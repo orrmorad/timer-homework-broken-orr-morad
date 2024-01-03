@@ -1,5 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Observable, timer, BehaviorSubject } from 'rxjs';
+import { Observable, timer, BehaviorSubject, interval } from 'rxjs';
 import { tap, filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class TimerManagerService {
     isRunning: boolean;
   }[] = [];
   constructor(private ngZone: NgZone) {
-    this.runTimers(); //FIXME: can be a performance issue
+    this.runTimers();
   }
 
   getTimer(id: number): Observable<number> {
@@ -39,12 +39,12 @@ export class TimerManagerService {
   private runTimers(): void {
     timer(0, 1000)
       .pipe(
-        filter((x) => this.timers.findIndex((y) => y.isRunning) >= 0),
+        filter((x) => this.timers.some((y) => y.isRunning)),
         tap(() => {
           this.ngZone.run(() => {
             this.timers
               .filter((x) => x.isRunning)
-              .forEach((subj) => subj.subj$.next(subj.subj$.value + 1));
+              .map((subj) => subj.subj$.next(subj.subj$.value + 1));
           });
         })
       )

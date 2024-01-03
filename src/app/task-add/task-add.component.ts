@@ -7,7 +7,6 @@ import {
 } from '@angular/forms';
 import { LogicService } from '../logic.service';
 import { map } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-task-add',
@@ -16,7 +15,7 @@ import { of } from 'rxjs';
 })
 export class TaskAddComponent implements OnInit {
   form: FormGroup;
-  constructor(private fb: FormBuilder, private service: LogicService) {}
+  constructor(private fb: FormBuilder, private service: LogicService) { }
   ngOnInit(): void {
     this.form = this.fb.group({
       text: [
@@ -27,7 +26,7 @@ export class TaskAddComponent implements OnInit {
     });
   }
   submitHandler(text: string) {
-    this.service.addTask(text);
+    this.service.addTask(text.toUpperCase());
     this.resetForm();
   }
   private resetForm() {
@@ -35,6 +34,13 @@ export class TaskAddComponent implements OnInit {
   }
 
   validateNameExists(control: AbstractControl) {
-    return of(null);
+    const uppercaseValue = control.value.toUpperCase();
+    return this.service.nameExists(uppercaseValue).pipe(
+      map(taskExists => {
+      if (taskExists) return { nameTaken: true };
+      return null;
+    }))
   }
+
+
 }

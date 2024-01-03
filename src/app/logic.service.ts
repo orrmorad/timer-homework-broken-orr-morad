@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TaskModel } from './models/task-model';
 import { Observable, combineLatest, Subject, of } from 'rxjs';
 import { TaskFactoryService } from './task-factory.service';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { CloneSubject } from './clone-subject';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class LogicService {
   private state: TaskModel[] = [...this.initialState];
   private logicSubj$ = new CloneSubject(this.state);
 
-  constructor(private taskService: TaskFactoryService) {}
+  constructor(private taskService: TaskFactoryService) { }
   public get tasks$(): Observable<TaskModel[]> {
     return this.logicSubj$.asObservable();
   }
@@ -31,13 +31,12 @@ export class LogicService {
 
   public get totalTime$(): Observable<number> {
     const res = new Subject<number>();
+    this.tasks$.pipe(
+      map((x) => x.map((y) => y.timer)),
+      switchMap(timer =>
+        combineLatest(timer).pipe(map(x => x.reduce((q, w) => q + w, 0))))
+    ).subscribe(x => res.next(x));
 
-    //FIXME: double subscribe is a bad practice
-    this.tasks$.pipe(map((x) => x.map((y) => y.timer))).subscribe((tmr) => {
-      combineLatest(tmr)
-        .pipe(map((x) => x.reduce((q, w) => q + w, 0)))
-        .subscribe((x) => res.next(x));
-    });
     return res.asObservable();
   }
   public nameExists(value: string): Observable<boolean> {

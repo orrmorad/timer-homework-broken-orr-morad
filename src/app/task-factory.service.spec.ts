@@ -8,4 +8,14 @@ describe('TaskFactoryService', () => {
     const service: TaskFactoryService = TestBed.get(TaskFactoryService);
     expect(service).toBeTruthy();
   });
+
+  it('should create a task', () => {
+    const service: TaskFactoryService = TestBed.get(TaskFactoryService);
+    const taskName = 'task';
+    const task = service.createTask(taskName);
+    expect(task.id).toBeDefined();
+    expect(task.buttonText).toBe('play_arrow');
+    expect(task.name).toBe(taskName);
+    expect(task.timer).toBeDefined();
+  })
 });

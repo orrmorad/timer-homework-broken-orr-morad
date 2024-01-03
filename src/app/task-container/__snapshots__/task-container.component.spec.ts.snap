@@ -4,50 +4,50 @@ exports[`TaskContainerComponent DOM should render tasks$ 1`] = `
 <div
   id="root3"
 >
-  <mat-card
-    class="mat-card mat-focus-indicator"
+  <div
+    class="task-list-container"
   >
-    <app-task-presenter>
-      <p>
-        {
+    <div
+      class="task"
+    >
+      <app-task-presenter>
+        <p>
+          {
   "id": 1,
   "name": "test1",
   "buttonText": "pause",
   "timer": {}
 }
-      </p>
-    </app-task-presenter>
-    <app-task-presenter>
-      <p>
-        {
+        </p>
+      </app-task-presenter>
+      <app-task-presenter>
+        <p>
+          {
   "id": 2,
   "name": "test2",
   "buttonText": "pause",
   "timer": {}
 }
-      </p>
-    </app-task-presenter>
-    <app-task-presenter>
-      <p>
-        {
+        </p>
+      </app-task-presenter>
+      <app-task-presenter>
+        <p>
+          {
   "id": 3,
   "name": "test3",
   "buttonText": "pause",
   "timer": {}
 }
-      </p>
-    </app-task-presenter>
+        </p>
+      </app-task-presenter>
+      
+    </div>
     
-  </mat-card>
-  <mat-card
-    class="mat-card mat-focus-indicator"
-  >
-    <mat-card-title
-      class="mat-card-title"
-    >
-       Total: 00:01 
-    </mat-card-title>
-  </mat-card>
+    
+    <h2>
+      Total: 00:01
+    </h2>
+  </div>
 </div>
 `;
 
@@ -55,19 +55,19 @@ exports[`TaskContainerComponent DOM should render totalTime$ 1`] = `
 <div
   id="root2"
 >
-  <mat-card
-    class="mat-card mat-focus-indicator"
+  <div
+    class="task-list-container"
   >
-    
-  </mat-card>
-  <mat-card
-    class="mat-card mat-focus-indicator"
-  >
-    <mat-card-title
-      class="mat-card-title"
+    <div
+      class="task"
     >
-       Total: 00:35 
-    </mat-card-title>
-  </mat-card>
+      
+    </div>
+    
+    
+    <h2>
+      Total: 00:35
+    </h2>
+  </div>
 </div>
 `;

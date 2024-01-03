@@ -5,7 +5,6 @@ import { skip, bufferCount } from 'rxjs/operators';
 describe('LogicService', () => {
   let service: LogicService;
   beforeEach(() => {
-    const taskModelStub = { id: {}, buttonText: {} };
     const fakeService = {
       createTask: () => ({}),
       pause: () => ({}),

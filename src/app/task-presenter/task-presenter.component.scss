@@ -1,9 +1,11 @@
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: baseline;
-}
 .input-name {
   width: 100px;
+}
+
+.task-details {
+  display: flex;
+  align-items: center;
+  height: 45px;
+  justify-content: space-between;
+  border-top: 1px solid;
 }
